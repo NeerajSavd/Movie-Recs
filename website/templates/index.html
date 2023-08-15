@@ -1,0 +1,26 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendeder</title>
+    <link rel="stylesheet"  type="text/css" href="{{url_for('.static', filename='style.css')}}">
+    <link rel="icon" type="image/x-icon" href="..\images\favicon.ico">
+</head>
+<body>
+    <h1>Movie Recommender</h1>
+    <form method="post">
+        <label>Enter Movie: </label>
+        <input list="movie_list" name="movies" id="movies"/>
+        <datalist id="movie_list">
+            {% for movie in movie_list %}
+            <option value= "{{movie}}" SELECTED>{{movie}}</option>"
+            {% endfor %}
+        </datalist>
+        <input type="submit" value="Search">
+    </form>
+    <br>
+    <h2>Top 10 Recommendations</h2>
+    {% if recommendation %}
+        <pre>{{recommendation}}</pre>
+    {% endif %}
+</body>
+</html>
