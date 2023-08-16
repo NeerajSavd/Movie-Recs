@@ -8,15 +8,35 @@
 <body>
     <h1>Movie Recommender</h1>
     <form method="post">
-        <label>Enter Movie: </label>
-        <input list="movie_list" name="movies" id="movies"/>
-        <datalist id="movie_list">
-            {% for movie in movie_list %}
-            <option value= "{{movie}}" SELECTED>{{movie}}</option>"
-            {% endfor %}
-        </datalist>
-        <input type="submit" value="Search">
+        <div class="serach">
+            <label>Enter Movie: </label>
+            <input list="movie_list" name="movies" id="movies"/>
+            <datalist id="movie_list">
+                {% for movie in movie_list %}
+                <option value= "{{movie}}" SELECTED>{{movie}}</option>"
+                {% endfor %}
+            </datalist>
+            <input type="submit" value="Search">
+        </div>
+        <br>
+        <div class="timeframe">
+            <label>Filter Year: </label>
+            <select name="minyear" id="minyear">
+                <option value="1900" selected>1900</option>
+                {% for year in year_list %}
+                <option value= "{{year}}">{{year}}</option>"
+                {% endfor %}
+            </select>
+            <label> to </label>
+            <select name="maxyear" id="maxyear">
+                <option value="2020" selected>2020</option>
+                {% for year in year_list %}
+                <option value= "{{year}}">{{year}}</option>"
+                {% endfor %}
+            </select>
+        </div>
     </form>
+
     <br>
     <h2>Top 10 Recommendations</h2>
     {% if recommendation %}
