@@ -1,15 +1,20 @@
 from smolagents import CodeAgent, LiteLLMModel
 from smolagents import DuckDuckGoSearchTool
-from tools import recommend, trending
+from tools import recommend, trending, time
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+openrouter_key = os.getenv("OPENROUTER_API_KEY")
 
 model = LiteLLMModel(
     model_id="openrouter/deepseek/deepseek-chat-v3-0324:free",
-    api_key="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",
+    api_key=openrouter_key,
     temperature=0.5,
     max_tokens=500
 )
 
-tools = [recommend, trending, DuckDuckGoSearchTool()]
+tools = [recommend, trending, DuckDuckGoSearchTool(), time]
 
 agent = CodeAgent(tools=tools, model=model, max_steps=10)
 

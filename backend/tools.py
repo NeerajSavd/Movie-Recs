@@ -2,6 +2,7 @@ from smolagents import tool
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime, date, timedelta
 
 @tool
 def recommend(movie: str, min_year:str = "1900", max_year: str = "2023") -> str:
@@ -64,3 +65,36 @@ def trending() -> str:
             "rating": rating_element.get_text(strip=True) if rating_element else "N/A"
         })
     return str(movies)
+
+@tool
+def time() -> str:
+    """
+    Get the current date and time to provide context for the agent, such as holidays or events.
+    No Args.
+    Returns:
+        str: A string containing the current date and time and upcoming holidays.
+    """
+    today = date.today()
+    holidays_list = {
+            date(today.year, 2, 14): "Valentine's Day",
+            date(today.year, 3, 17): "St. Patrick's Day",
+            date(today.year, 5, 5): "Cinco de Mayo",
+            date(today.year, 7, 4): "Independence Day",
+            date(today.year, 9, 4): "Labor Day",
+            date(today.year, 10, 31): "Halloween",
+            date(today.year, 11, 11): "Veterans Day",
+            date(today.year, 11, 24): "Thanksgiving Day",
+            date(today.year, 12, 25): "Christmas Day",
+            date(today.year+1, 1, 1): "New Year's Day",
+        }
+    current_date = date.today()
+    current_time = datetime.now().strftime("%H:%M")
+    two_weeks_later = current_date + timedelta(weeks=2)
+    holidays_within_two_weeks = [
+        (date, name) for date, name in holidays_list.items() if current_date <= date <= two_weeks_later
+    ]
+    if not holidays_within_two_weeks:
+        return f"Current date: {current_date}, Current time: {current_time}, No upcoming holidays within two weeks."
+    return f"Current date: {current_date}, Current time: {current_time}, Holidays within two weeks: {holidays_within_two_weeks}."
+    
+    
