@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime, date, timedelta
 
 @tool
-def recommend(movie: str, min_year:str = "1900", max_year: str = "2023") -> str:
+def recommend(movie: str, min_year: str = "1900", max_year: str = "2023") -> str:
     """
     Recommend movies based on the given movie name and year range.
     Args:
@@ -15,8 +15,8 @@ def recommend(movie: str, min_year:str = "1900", max_year: str = "2023") -> str:
     Returns:
         str: A string of 10 recommended movie titles.
     """
-    movies_df = pd.read_csv('backend/inputs/movies.csv', encoding = 'ISO-8859-1', usecols=range(3))
-    predictions = pd.read_csv('backend/inputs/predictions5264.csv')
+    movies_df = pd.read_csv('/Users/neeraj/Library/CloudStorage/OneDrive-Personal/Coding/Netflix/backend/inputs/movies.csv', encoding = 'ISO-8859-1', usecols=range(3))
+    predictions = pd.read_csv('/Users/neeraj/Library/CloudStorage/OneDrive-Personal/Coding/Netflix/backend/inputs/predictions5264.csv')
 
     try:
         index = movies_df[movies_df['Name'] == movie]['Id'].iloc[0]

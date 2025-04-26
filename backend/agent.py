@@ -35,5 +35,5 @@ Use the following format for your response:
 """
 query = "I like The Godfather and Pulp Fiction. What are other old crime movies I should watch?"
 
-response = agent.run(task=prompt+"\n"+query, max_steps=10)
+response = agent.run(task=prompt+"\n"+query, max_steps=5)
 print(response)
